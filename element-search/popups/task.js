@@ -6,9 +6,10 @@ window.addEventListener('load', function(){
 })
 
 successButton.addEventListener('click', function(){
+	modalWindows[0].className = 'modal';
 	modalWindows[1].className = 'modal modal_active';
 })
 
-closeButtons.forEach((item) => {item.addEventListener('click', function(){
-	modalWindows.forEach((item) => {item.className = 'modal'}); 
-})} );
+closeButtons.forEach(item => item.addEventListener('click', function(){
+	modalWindows.forEach(item => item.className = 'modal'); 
+}));

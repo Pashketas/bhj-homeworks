@@ -8,35 +8,39 @@ window.addEventListener('load', function(){
 	dots[activeIndex].className = 'slider__dot slider__dot_active'
 })
 
+let activeIndex = imagesCollection.findIndex((item) => item.className === 'slider__item slider__item_active');
+
+function showImage(position){
+	imagesCollection[position].className = 'slider__item slider__item_active'
+	dots[position].className = 'slider__dot slider__dot_active'
+} 
+
+function hideImage(position){
+	imagesCollection[position].className = 'slider__item'
+	dots[position].className = 'slider__dot'	
+}
+
 arrowRight.addEventListener('click', function(){
-	let activeIndex = imagesCollection.findIndex((item) => item.className === 'slider__item slider__item_active');
-	imagesCollection[activeIndex].className = 'slider__item';
-	dots[activeIndex].className = 'slider__dot';
+	hideImage(activeIndex);
 	activeIndex++;
 	if (activeIndex === imagesCollection.length) {
 		activeIndex = 0;
 	}
-	imagesCollection[activeIndex].className = 'slider__item slider__item_active';
-	dots[activeIndex].className = 'slider__dot slider__dot_active';
+	showImage(activeIndex);
 	})
 
 
 arrowLeft.addEventListener('click', function(){
-	let activeIndex = imagesCollection.findIndex((item) => item.className === 'slider__item slider__item_active');
-	imagesCollection[activeIndex].className = 'slider__item';
-	dots[activeIndex].className = 'slider__dot';
+	hideImage(activeIndex);
 	activeIndex--;
 	if (activeIndex === -1) {
 		activeIndex = imagesCollection.length - 1;
 	}
-	imagesCollection[activeIndex].className = 'slider__item slider__item_active';
-	dots[activeIndex].className = 'slider__dot slider__dot_active';
+	showImage(activeIndex);
 	})
 
 dots.forEach((item, index) => item.addEventListener('click', function(){
-	let activeIndex = imagesCollection.findIndex((item) => item.className === 'slider__item slider__item_active');
-	imagesCollection[activeIndex].className = 'slider__item';
-	dots[activeIndex].className = 'slider__dot';
-	imagesCollection[index].className = 'slider__item slider__item_active';
-	dots[index].className = 'slider__dot slider__dot_active';
+	hideImage(activeIndex);
+	showImage(index);
+	activeIndex = index;
 }))
