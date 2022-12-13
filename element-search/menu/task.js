@@ -5,6 +5,7 @@ for (let i = 0; i < menuItems.length; i++) {
 		link.addEventListener('click', function(){
 			if (menuItems[i].querySelector('ul.menu').className.includes("menu_active")){
 				menuItems[i].querySelector('ul.menu').className = 'menu menu_sub'
+				event.preventDefault();
 				return
 			}
 			let filtered = menuItems.filter((item) => item.querySelector('ul.menu')); 

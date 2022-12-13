@@ -4,8 +4,9 @@ class Game {
     this.wordElement = container.querySelector('.word');
     this.winsElement = container.querySelector('.status__wins');
     this.lossElement = container.querySelector('.status__loss');
-
+    this.timer = container.querySelector('.timer')
     this.reset();
+    
 
     this.registerEvents();
   }
@@ -14,16 +15,23 @@ class Game {
     this.setNewWord();
     this.winsElement.textContent = 0;
     this.lossElement.textContent = 0;
+    this.timer.textContent = this.wordElement.innerText.length;
   }
 
   registerEvents() {
-    /*
-      TODO:
-      Написать обработчик события, который откликается
-      на каждый введённый символ.
-      В случае правильного ввода слова вызываем this.success()
-      При неправильном вводе символа - this.fail();
-     */
+    setInterval((() => {
+    this.timer.textContent = this.timer.textContent - 1;
+    if (this.timer.textContent == 0) {
+      this.fail();
+      this.timer.textContent = this.wordElement.innerText.length;
+    }}), 1000);
+    document.addEventListener('keydown', () => {
+      if (this.currentSymbol.textContent === event.key) {
+        this.success();
+      } else {
+        this.fail();
+        }
+      });
   }
 
   success() {
@@ -38,6 +46,7 @@ class Game {
       this.reset();
     }
     this.setNewWord();
+    this.timer.textContent = this.wordElement.innerText.length;
   }
 
   fail() {
@@ -56,17 +65,19 @@ class Game {
 
   getWord() {
     const words = [
-        'bob',
-        'awesome',
-        'netology',
-        'hello',
-        'kitty',
-        'rock',
-        'youtube',
-        'popcorn',
-        'cinema',
-        'love',
-        'javascript'
+        'university',
+        'injury',
+        'broadcasting',
+        'transmission',
+        'recover',
+        'education',
+        'challenge',
+        'government',
+        'observatory',
+        'gothrough',
+        'unpredictable',
+        'responsibilities',
+        'experienced'
       ],
       index = Math.floor(Math.random() * words.length);
 

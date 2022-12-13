@@ -13,7 +13,7 @@ for (let i = 1; i < 10; i++) {
 }
 
 holes.forEach(item => item.addEventListener('click', function (){
-	if (item.className.includes("hole_has-mole")) {
+	if (item.classList.contains("hole_has-mole")) {
 		deadMoles.textContent = Number(deadMoles.textContent) + 1;
 	} else {
 		misses.textContent = Number(deadMoles.textContent) + 1;
