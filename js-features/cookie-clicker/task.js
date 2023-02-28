@@ -13,5 +13,3 @@ function clickCookie() {
 }
 
 cookie.onclick = clickCookie;
-
-
