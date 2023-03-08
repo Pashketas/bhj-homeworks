@@ -15,7 +15,6 @@ class Game {
     this.setNewWord();
     this.winsElement.textContent = 0;
     this.lossElement.textContent = 0;
-    this.timer.textContent = this.wordElement.innerText.length;
   }
 
   registerEvents() {
@@ -23,7 +22,6 @@ class Game {
     this.timer.textContent = this.timer.textContent - 1;
     if (this.timer.textContent == 0) {
       this.fail();
-      this.timer.textContent = this.wordElement.innerText.length;
     }}), 1000);
     document.addEventListener('keydown', () => {
       if (this.currentSymbol.textContent === event.key) {
@@ -61,6 +59,7 @@ class Game {
     const word = this.getWord();
 
     this.renderWord(word);
+    this.timer.textContent = this.wordElement.innerText.length;
   }
 
   getWord() {
