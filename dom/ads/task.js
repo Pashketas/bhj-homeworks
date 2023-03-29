@@ -1,4 +1,4 @@
-let rotations = Array.from(document.getElementsByClassName('rotator__case'));
+const rotations = Array.from(document.getElementsByClassName('rotator__case'));
 //let timeoutId = null;
 
 function setColor (arr, index) {
@@ -15,8 +15,10 @@ function switchActive (arr) {
     }
     arr[activeIndex].classList.add('rotator__case_active');
     setColor(arr, activeIndex);
-    const speed = arr[activeIndex].getAttribute('data-speed') 
+    const speed = arr[activeIndex].getAttribute('data-speed');
+    setTimeout(() => switchActive(arr), speed);
 }
+switchActive(rotations);
 
 /*function switchActive (arr) {
     if (timeoutId === null){
@@ -39,4 +41,4 @@ function switchActive (arr) {
 }
 switchActive(rotations);*/
 
-setInterval(()=> switchActive(rotations), 1000)
+//setInterval(()=> switchActive(rotations), 1000)
