@@ -57,16 +57,47 @@ bgColorButtons.forEach((item, index) => item.addEventListener('click', function(
     const color = arr[index].getAttribute('data-color');
     arr[index].setAttribute('style', `color: ${color}`);
 }
-function switchActive (arr) {
-    
-    arr[activeIndex].classList.remove('font-size_active');
-    if (activeIndex === (arr.length - 1)) {
-        activeIndex = 0;
-    } else {
-        activeIndex++;
+
+<--Лаконичное решение для читалки-->
+const bookElement = document.getElementById("book");
+const controlElements = document.querySelector(".book__controls");
+
+controlElements.addEventListener("click", function (event) {
+  event.preventDefault();
+
+  const { size, textColor, bgColor } = event.target.dataset;
+
+  const elementClassArray = event.target.classList;
+  const activeControl = event.target
+    .closest(".book__control")
+    .querySelectorAll("a");
+
+  activeControl.forEach((element) => {
+    element.classList.remove(elementClassArray[0] + "_active");
+  });
+
+  event.target.classList.add(elementClassArray[0] + "_active");
+
+  function removePreviousClassName(className) {
+    for (value of bookElement.classList) {
+      if (value.includes(className)) {
+        bookElement.classList.remove(value);
+      }
     }
-    arr[activeIndex].classList.add('rotator__case_active');
-    setColor(arr, activeIndex);
-    const speed = arr[activeIndex].getAttribute('data-speed') 
-}
-*/
+  }
+
+  if (size || event.target.className === "font-size font-size_active") {
+    removePreviousClassName("book_fs-");
+    bookElement.classList.add("book_fs-" + size);
+  }
+
+  if (textColor) {
+    removePreviousClassName("book_color-");
+    bookElement.classList.add("book_color-" + textColor);
+  }
+
+  if (bgColor) {
+    removePreviousClassName("book_bg-");
+    bookElement.classList.add("book_bg-" + bgColor);
+  }
+}); */
