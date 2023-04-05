@@ -1,13 +1,14 @@
 const tipLinks = Array.from(document.getElementsByClassName('has-tooltip'));
 let tip = document.createElement('div');
+tip.className = 'tooltip';
 
 tipLinks.forEach((item) => item.addEventListener('click', (e) => {
 	const {bottom, left} = item.getBoundingClientRect();
 	tip.textContent = `${item.title}`;
-	tip.className = 'tooltip tooltip_active';
+	tip.classList.toggle('tooltip_active')
 	tip.style.left = `${left}px`;
 	tip.style.top = `${bottom}px`;
-	item.appendChild(tip);
+	item.after(tip);
 	e.preventDefault();
 }))
 
