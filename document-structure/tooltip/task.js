@@ -1,15 +1,19 @@
 const tipLinks = Array.from(document.getElementsByClassName('has-tooltip'));
 let tip = document.createElement('div');
-tip.className = 'tooltip';
+tip.className = 'tooltip tooltip_active';
 
 tipLinks.forEach((item) => item.addEventListener('click', (e) => {
-	const {bottom, left} = item.getBoundingClientRect();
-	tip.textContent = `${item.title}`;
-	tip.classList.toggle('tooltip_active')
-	tip.style.left = `${left}px`;
-	tip.style.top = `${bottom}px`;
-	item.after(tip);
 	e.preventDefault();
+	const {bottom, left} = item.getBoundingClientRect();
+	const nextEl = item.nextElementSibling;
+	if (nextEl && nextEl.className.includes('tooltip_active')) {
+		tip.remove();
+	} else {
+		tip.textContent = `${item.title}`;
+		tip.style.left = `${left}px`;
+		tip.style.top = `${bottom}px`;
+		item.after(tip);
+	}
 }))
 
-document.addEventListener('scroll', () => tip.classList.remove('tooltip_active'));
+document.addEventListener('scroll', () => tip.remove());
